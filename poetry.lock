@@ -4,18 +4,34 @@ description = "Universal Command Line Environment for AWS."
 name = "awscli"
 optional = false
 python-versions = "*"
-version = "1.16.226"
+version = "1.16.263"
 
 [package.dependencies]
-botocore = "1.12.216"
-colorama = ">=0.2.5,<=0.3.9"
+botocore = "1.12.253"
 docutils = ">=0.10,<0.16"
 rsa = ">=3.1.2,<=3.5.0"
 s3transfer = ">=0.2.0,<0.3.0"
 
 [package.dependencies.PyYAML]
-python = "<2.6.0 || >=2.7.0"
-version = ">=3.10,<=5.2"
+python = "<2.6.0 || >=2.7.0,<3.3.0 || >=3.4.0"
+version = ">=3.10,<5.2"
+
+[package.dependencies.colorama]
+python = "<2.6.0 || >=2.7.0,<3.3.0 || >=3.4.0"
+version = ">=0.2.5,<0.4.2"
+
+[[package]]
+category = "main"
+description = "The AWS SDK for Python"
+name = "boto3"
+optional = false
+python-versions = "*"
+version = "1.9.253"
+
+[package.dependencies]
+botocore = ">=1.12.253,<1.13.0"
+jmespath = ">=0.7.1,<1.0.0"
+s3transfer = ">=0.2.0,<0.3.0"
 
 [[package]]
 category = "main"
@@ -23,7 +39,7 @@ description = "Low-level, data-driven core of boto 3."
 name = "botocore"
 optional = false
 python-versions = "*"
-version = "1.12.216"
+version = "1.12.253"
 
 [package.dependencies]
 docutils = ">=0.10,<0.16"
@@ -40,6 +56,7 @@ version = ">=1.20,<1.26"
 [[package]]
 category = "main"
 description = "Cross-platform colored terminal text."
+marker = "python_version != \"2.6\" and python_version != \"3.3\""
 name = "colorama"
 optional = false
 python-versions = "*"
@@ -84,7 +101,7 @@ six = ">=1.5"
 [[package]]
 category = "main"
 description = "YAML parser and emitter for Python"
-marker = "python_version != \"2.6\""
+marker = "python_version != \"2.6\" and python_version != \"3.3\""
 name = "pyyaml"
 optional = false
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
@@ -131,12 +148,13 @@ python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, <4"
 version = "1.25.3"
 
 [metadata]
-content-hash = "d247a0b58f8ba1bf8b078fe594b2eee45864139cbce62cc6e0019ffadf00edb1"
+content-hash = "7d0ecd88b5ab28169d548ac0f1ad68b761be1d4515537a86994ffb97350e6a1f"
 python-versions = "^3.6"
 
 [metadata.hashes]
-awscli = ["c2caf349c29c0382b93b43375807243590bfe848808fb9995e9d6369f9e20de3", "e504cdac3963c254553ef44b17cf1e6079767e6ab6fcc0f36982bdea3c06a313"]
-botocore = ["63ca29cf8a47b190886923c789a3f2b2a7e1665b5f6e22a97fed057af2e5f1af", "bebb869754459035fe45eac1f8a93a97dd8698522bc7f7ebde791e32311b035a"]
+awscli = ["4f4872356e5ef7d98aa63397e3cf1a44a61440d5c2e08328db1fc9f61ce115e3", "d7b9a1d4c85bd812876d05828b3d93f924210a94502be77bee27f2ecfa73a541"]
+boto3 = ["839285fbd6f3ab16170af449ae9e33d0eccf97ca22de17d9ff68b8da2310ea06", "d93f1774c4bc66e02acdda2067291acb9e228a035435753cb75f83ad2904cbe3"]
+botocore = ["3baf129118575602ada9926f5166d82d02273c250d0feb313fc270944b27c48b", "dc080aed4f9b220a9e916ca29ca97a9d37e8e1d296fe89cbaeef929bf0c8066b"]
 colorama = ["463f8483208e921368c9f306094eb6f725c6ca42b0f97e313cb5d5512459feda", "48eb22f4f8461b1df5734a074b57042430fb06e1d61bd1e11b078c0fe6d7a1f1"]
 docutils = ["6c4f696463b79f1fb8ba0c594b63840ebd41f059e92b31957c46b74a4599b6d0", "9e4d7ecfc600058e07ba661411a2b7de2fd0fafa17d1a7f7361cd47b1175c827", "a2aeea129088da402665e92e0b25b04b073c04b2dce4ab65caaa38b7ce2e1a99"]
 jmespath = ["3720a4b1bd659dd2eecad0666459b9788813e032b83e7ba58578e48254e0a0e6", "bde2aef6f44302dfb30320115b17d030798de8c4110e28d5cf6cf91a7a31074c"]
