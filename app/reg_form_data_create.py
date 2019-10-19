@@ -1,6 +1,9 @@
 import json
 
+import send_email
+
 import boto3
+
 
 client = boto3.client('dynamodb')
 def update_reg_num(num=1):
@@ -50,6 +53,7 @@ def lambda_handler(data, context):
         client.put_object(Body=bytes(json.dumps(data), encoding='utf-8'), 
                           Bucket='md410-2020-conv', 
                           Key=fn)
+        send_email.send_email(reg_num)
         return f'md410-2020-conv/{fn}'
     except Exception as e:
         raise
