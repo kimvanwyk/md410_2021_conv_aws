@@ -4,9 +4,8 @@ import send_email
 
 import boto3
 
-
-client = boto3.client('dynamodb')
 def update_reg_num(num=1):
+    client = boto3.client('dynamodb')
     response = client.update_item(
     TableName='MDConv2020RefNum',
     Key={
@@ -41,19 +40,19 @@ def update_reg_num(num=1):
         )
     return reg_num
 
-def lambda_handler(data, context):
+def lambda_handler(event, context):
     try:
-        client = boto3.client('s3')
-
+        s3_client = boto3.client('s3')
+        data = json.loads(event['body'])['data']
         num = 1 if data['partner'] == 'partner_none' else 2
 
         reg_num = update_reg_num(num)
         data['registration_number'] = reg_num
         fn = f'reg_forms/{reg_num:03}/data.json'
-        client.put_object(Body=bytes(json.dumps(data), encoding='utf-8'), 
+        s3_client.put_object(Body=bytes(json.dumps(data), encoding='utf-8'), 
                           Bucket='md410-2020-conv', 
                           Key=fn)
         send_email.send_email(reg_num)
-        return f'md410-2020-conv/{fn}'
+        return {"statusCode": 200, "body": json.dumps({"reg_num": reg_num})}
     except Exception as e:
         raise
