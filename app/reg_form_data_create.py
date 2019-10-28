@@ -1,3 +1,4 @@
+import datetime
 import json
 
 import send_email
@@ -48,6 +49,7 @@ def lambda_handler(event, context):
 
         reg_num = update_reg_num(num)
         data['registration_number'] = reg_num
+        data['timestamp'] = datetime.datetime.now(datetime.timezone(datetime.timedelta(hours=2))).strftime('%y/%m/%d %H:%M:%S')
         fn = f'reg_forms/{reg_num:03}/data.json'
         s3_client.put_object(Body=bytes(json.dumps(data), encoding='utf-8'), 
                           Bucket='md410-2020-conv', 
