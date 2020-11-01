@@ -2,7 +2,7 @@
 
 # Create table
 aws dynamodb create-table \
-    --table-name MDConv2020RefNum \
+    --table-name MDConv2021RefNum \
     --attribute-definitions \
         AttributeName=ID,AttributeType=N \
     --key-schema AttributeName=ID,KeyType=HASH \
@@ -10,7 +10,7 @@ aws dynamodb create-table \
 
 # Initial table population
 aws dynamodb put-item \
-    --table-name MDConv2020RefNum \
+    --table-name MDConv2021RefNum \
     --item '{
         "RefNum": {"N": "1"}, 
         "ID": {"N": "1"} }' \
@@ -18,7 +18,7 @@ aws dynamodb put-item \
 
 # Update for each new registration
 aws dynamodb update-item \
-    --table-name MDConv2020RefNum \
+    --table-name MDConv2021RefNum \
     --key '{"ID": {"N":"1"} }' \
     --update-expression "SET RefNum = RefNum + :r" \
     --expression-attribute-values '{":r": {"N":"1"}}' \
@@ -26,5 +26,5 @@ aws dynamodb update-item \
 
 # Delete table
 aws dynamodb delete-table \
-    --table-name MDConv2020RefNum
+    --table-name MDConv2021RefNum
 
